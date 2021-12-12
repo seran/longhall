@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<%= favicon_link_tag asset_path('favicon-32x32.png') %>
+	<title>Project Longhall</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<%= csrf_meta_tags %>
+	<%= csp_meta_tag %>
+
+	<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+	<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+
+
+
+	<nav class="navbar is-black" role="navigation" aria-label="main navigation">
+		<div class="container">
+			<div class="navbar-brand">
+				<a class="navbar-item" href="/">
+					<%= fa_icon "bolt" %>
+				</a>
+
+				<a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+				</a>
+			</div>
+
+			<div id="navbarBasicExample" class="navbar-menu">
+				<div class="navbar-start">
+					<% if user_signed_in? %>
+					<%= link_to home_page_url, class: "navbar-item" do %>Dashboard<% end %>
+					<%= link_to projects_list_url, class: "navbar-item" do %>Projects<% end %>
+					<%= link_to scopes_list_url, class: "navbar-item" do %>Scopes<% end %>
+					<%= link_to issues_list_url, class: "navbar-item" do %>Issues<% end %>
+					<% end %>
+				</div>
+
+				<div class="navbar-end">
+					<%= link_to help_page_path, class: "navbar-item" do %>
+						<%= fa_icon "question-circle" %>
+					<% end %>
+					
+					<% if user_signed_in? %>
+						<% if current_user.admin! %>
+							<%= link_to "Adminland", admin_general_page_path, class: "navbar-item" %>
+						<% end %>
+
+						<div class="navbar-item has-dropdown is-hoverable">
+							<a class="navbar-link">
+								<p>Hello!</p>
+							</a>
+
+							<div class="navbar-dropdown is-right">
+								<%= link_to "Settings", settings_page_path, class: "navbar-item" %>
+								<hr class="navbar-divider">
+								<%= link_to destroy_user_session_path, method: :delete, class:"navbar-item" do %>
+								<%= fa_icon "power-off" %>&nbsp;Log Out
+								<% end %>
+						</div>
+					<% else %>
+						<%= link_to "Log in", new_user_session_path, class: "navbar-item" %>
+					<% end %>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+
+
+		<div class="container" style="margin-top: 10px;">
+			<div class="columns">
+				<div class="column">
+					<% if flash[:notice] %>
+					<div class="notification is-primary global-notification">
+						<p class="notice"><%= notice %></p>
+					</div>
+					<% end %>
+					<% if flash[:errors] %>
+					<% flash[:errors].each do |error| %>
+					<div class="notification is-danger global-notification">
+						<p class="notice"><%= error %></p>
+					</div>
+					<% end %>
+					<% end %>
+					<% if flash[:alert] %>
+					<div class="notification is-warning global-notification">
+						<p class="alert"><%= alert %></p>
+					</div>
+					<% end %>
+				</div>
+			</div>
+
+			<div class="columns">
+				<div class="column">
+					<%= yield %>
+				</div>
+			</div>
+		</div>
+	</body>
+	</html>

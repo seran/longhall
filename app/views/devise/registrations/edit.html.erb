@@ -1,0 +1,66 @@
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-4">
+        <h2 class="title is-2">Edit <%= resource_name.to_s.humanize %></h2>
+
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= f.error_notification %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+
+        <div class="field">
+          <div class="control">
+            <%= f.input :name, required: true, input_html: { class: "input"}, wrapper: false, label_html: { class: "label" } %>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <%= f.input :phone, required: false, input_html: { class: "input"}, wrapper: false, label_html: { class: "label" } %>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <%= f.input :email, required: true, input_html: { class: "input"}, wrapper: false, label_html: { class: "label" } %>
+          </div>
+        </div>
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+
+        <hr />
+
+        <div class="field">
+          <div class="control">
+            <%= f.input :current_password, required: true, input_html: { class: "input"}, wrapper: false, label_html: { class: "label" } %>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <%= f.input :password, required: true, input_html: { class: "input"}, wrapper: false, label_html: { class: "label" }, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <%= f.input :password_confirmation, required: true, input_html: { class: "input"}, wrapper: false, label_html: { class: "label" } %>
+          </div>
+        </div>
+
+        <%= f.button :submit, "Update", class:"button is-primary is-outlined is-fullwidth" %>
+        <% end %>
+
+        <hr />
+          <p class="has-text-centered"><%= link_to "Back", :back %></p>
+        <hr />
+
+        <p><%= button_to "Close my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "button is-danger is-fullwidth" %></p>
+        <p class="help is-danger">Warning: this is not a reversible action. There is no way to recover a deleted account.</p>
+        
+      </div>
+    </div>
+  </div>
+</section>

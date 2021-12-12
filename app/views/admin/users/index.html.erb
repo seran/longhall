@@ -1,0 +1,13 @@
+<div class="columns">
+	<div class="column">
+		<%= render "/admin/tab" %>
+
+		<div class="columns">
+			<div class="column">
+				<% @users.each do |user| %>
+				<%= user.email %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
