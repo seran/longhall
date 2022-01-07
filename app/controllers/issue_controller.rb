@@ -6,9 +6,9 @@ class IssueController < ApplicationController
 	def index
 		if !params[:search].blank?
 			@parameter = params[:search].downcase
-			@records = Issue.all.where("lower(name) LIKE :search", search: "%#{@parameter}%")
+			@pagy, @records = pagy(Issue.all.where("lower(title) LIKE :search", search: "%#{@parameter}%"), items: 1)
 		else
-			@pagy, @records = pagy(Issue.all, items: 2)
+			@pagy, @records = pagy(Issue.all, items: 1)
 		end
 	end
 

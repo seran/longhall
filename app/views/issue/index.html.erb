@@ -9,9 +9,80 @@
 		</div>
 		<div class="columns">
 			<div class="column">
-				<% @records.each do |record| %>
-					<%= record.title %>
-				<% end %>	
+				<div class="columns">
+					<div class="column">
+						<p class="has-text-weight-semibold">Issues (<%= @records.length %>)</p>
+					</div>
+					<div class="column is-3">
+						<% if @records.length > 0 %>
+						<%= render partial: 'pagy/bulma_nav', locals: {pagy: @pagy} %>
+						<% end %>
+					</div>
+				</div>
+				<div class="columns">
+					<div class="column is-10">
+						<form method="get">
+							<input type="text" class="input is-small" name="search" placeholder="Search.." value="<%= params[:search] %>" />
+						</form>
+					</div>
+					<div class="column">
+						<a href="#" class="button is-small is-primary is-outlined">New issue</a>
+					</div>
+				</div>
+				<div class="columns">
+					<div class="column">
+						<div class="field is-grouped is-grouped-multiline">
+							<div class="control">
+								<div class="tags has-addons">
+									<span class="tag is-dark">Open</span>
+									<span class="tag is-info">3</span>
+								</div>
+							</div>
+
+							<div class="control">
+								<div class="tags has-addons">
+									<span class="tag is-dark">Closed</span>
+									<span class="tag is-success">10</span>
+								</div>
+							</div>
+
+							<div class="control">
+								<div class="tags has-addons">
+									<span class="tag is-dark">In progress</span>
+									<span class="tag is-primary">2</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="columns">
+					<div class="column">
+						<table class="table is-striped is-fullwidth is-bordered">
+							<thead>
+								<tr>
+									<th></th>
+									<th>Title</th>
+									<th>Descrption</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<% @records.each do |s| %>
+								<tr>
+									<td width="5%"><%= fa_icon "folder" %></td>
+									<td width="30%"><%= s.title %></td>
+									<td><%= s.description %></td>
+									<td class="level-right">
+										<%= link_to view_scope_path(s.uuid)  do %>
+										<%= fa_icon "folder-open-o" %>
+										<% end %>
+									</td>
+								</tr>
+								<% end %>
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
