@@ -15,12 +15,12 @@
 
 
 
-	<nav class="navbar is-black" role="navigation" aria-label="main navigation">
-		<div class="container">
+	<nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
+		<div class="container is-max-desktop">
 			<div class="navbar-brand">
-				<a class="navbar-item" href="/">
+				<%= link_to home_page_path, class: "navbar-item #{current(home_page_path)}" do %>
 					<%= fa_icon "bolt" %>
-				</a>
+				<% end %>
 
 				<a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
 					<span aria-hidden="true"></span>
@@ -32,21 +32,19 @@
 			<div id="navbarBasicExample" class="navbar-menu">
 				<div class="navbar-start">
 					<% if user_signed_in? %>
-					<%= link_to home_page_url, class: "navbar-item" do %>Dashboard<% end %>
-					<%= link_to projects_list_url, class: "navbar-item" do %>Projects<% end %>
-					<%= link_to scopes_list_url, class: "navbar-item" do %>Scopes<% end %>
-					<%= link_to issues_list_url, class: "navbar-item" do %>Issues<% end %>
+					<%= link_to projects_list_path, class: "navbar-item #{current(projects_list_path)}" do %>Projects<% end %>
+					<%= link_to issues_list_path, class: "navbar-item #{current(issues_list_path)}" do %>Issues<% end %>
 					<% end %>
 				</div>
 
 				<div class="navbar-end">
-					<%= link_to help_page_path, class: "navbar-item" do %>
+					<%= link_to help_page_path, class: "navbar-item #{current(help_page_path)}" do %>
 						<%= fa_icon "question-circle" %>
 					<% end %>
 					
 					<% if user_signed_in? %>
 						<% if current_user.admin! %>
-							<%= link_to "Adminland", admin_general_page_path, class: "navbar-item" %>
+							<%= link_to "Adminland", admin_general_page_path, class: "navbar-item #{current(admin_general_page_path)}" %>
 						<% end %>
 
 						<div class="navbar-item has-dropdown is-hoverable">
@@ -55,10 +53,10 @@
 							</a>
 
 							<div class="navbar-dropdown is-right">
-								<%= link_to "Settings", settings_page_path, class: "navbar-item" %>
+								<%= link_to "Settings", settings_page_path, class: "navbar-item #{current(settings_page_path)}" %>
 								<hr class="navbar-divider">
 								<%= link_to destroy_user_session_path, method: :delete, class:"navbar-item" do %>
-								<%= fa_icon "power-off" %>&nbsp;Log Out
+									<%= fa_icon "power-off" %>&nbsp;Log Out
 								<% end %>
 						</div>
 					<% else %>
@@ -69,11 +67,9 @@
 			</div>
 		</nav>
 
-
-
-		<div class="container" style="margin-top: 10px;">
-			<div class="columns">
-				<div class="column">
+		<div class="container is-max-desktop" style="margin-top: 10px;">
+			<div class="columns is-centered">
+				<div class="column is-6">
 					<% if flash[:notice] %>
 					<div class="notification is-primary global-notification">
 						<p class="notice"><%= notice %></p>

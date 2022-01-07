@@ -1,0 +1,48 @@
+<div class="columns">
+	<div class="column">
+		<div class="columns">
+			<div class="column">
+				<div class="buttons">
+					<%= link_to new_project_path, class: "button is-primary is-outlined" do %>
+						<%= fa_icon "pencil" %>&nbsp;New project
+					<% end %>
+				</div>
+			</div>
+			<div class="column is-3">
+				<!-- <nav class="pagination is-centered" role="navigation" aria-label="pagination"> -->
+					<%= pagy_bulma_nav(@pagy).html_safe %>
+				<!-- </nav> -->
+			</div>
+		</div>
+		<div class="columns">
+			<div class="column">
+				<div class="columns is-multiline">
+					<% @records.each do |record| %>
+					<div class="column is-3">
+						<div class="card">
+							<div class="card-content">
+								<div class="content">
+									<h4>
+										<span style="color:  <%= status_color(record.status) %>">|</span>
+
+										<%= truncate(record.title, length: 18) %>
+									</h4>
+									<p><%= truncate(record.description, :length => 25) %></p>
+								</div>
+							</div>
+							<footer class="card-footer">
+								<%= link_to view_project_path(record.uuid), class: "card-footer-item" do %>
+									More&nbsp;<%= fa_icon "angle-right" %>
+								<% end %>
+							</footer>
+						</div>
+					</div>
+					<% end %>	
+				</div>
+				
+
+
+			</div>
+		</div>
+	</div>
+</div>

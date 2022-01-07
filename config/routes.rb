@@ -8,18 +8,25 @@ Rails.application.routes.draw do
   #   registrations: 'users/registrations'
   # }
 
-  get '/test', to: 'home#index', as: 'home_page'
+  get '/', to: 'home#index', as: 'home_page'
 
-  get '/projects', to: 'projects#index', as: 'projects_list'
-  get '/projects/create', to: 'projects#new', as: 'project_new'
-  post '/projects/create', to: 'projects#create', as: 'project_create'
+  get '/projects', to: 'project#index', as: 'projects_list'
+  get '/projects/create', to: 'project#new', as: 'new_project'
+  post '/projects/create', to: 'project#create', as: 'create_project'
+  get '/projects/view/:uuid', to: 'project#view', as: 'view_project'
 
-  get '/scopes', to: 'scopes#index', as: 'scopes_list'
-  get '/issues', to: 'issues#index', as: 'issues_list'
+  get '/scopes', to: 'scope#index', as: 'scopes_list'
+  get '/scopes/create/:uuid', to: 'scope#new', as: 'new_scope'
+  post '/scopes/create/:uuid', to: 'scope#create', as: 'create_scope'
+  get '/scopes/view/:uuid', to: 'scope#view', as: 'view_scope'
+
+  get '/issues', to: 'issue#index', as: 'issues_list'
+  get '/issues/create/:uuid', to: 'issue#new', as: 'new_issue'
+  post '/issues/create/:uuid', to: 'issue#create', as: 'create_issue'
+  get '/issues/view/:uuid', to: 'issue#view', as: 'view_issue'
   
   get '/admin', to: 'admin/general#index', as: 'admin_general_page'
   get '/admin/users', to: 'admin/users#index', as: 'admin_users_page'
-  get '/admin/teams', to: 'admin/teams#index', as: 'admin_teams_page'
 
   get '/settings', to: 'settings#index', as: 'settings_page'
   get '/help', to: 'help#index', as: 'help_page'

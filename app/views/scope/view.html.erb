@@ -1,0 +1,65 @@
+<div class="columns">
+	<div class="column">
+		<div class="columns">
+			<div class="column">
+				<%= link_to new_issue_path(uuid: @record.uuid), class: "button is-primary is-outlined"  do %>
+					<%= fa_icon "pencil" %>&nbsp;Add issue
+				<% end %>
+			</div>
+		</div>
+
+		<div class="columns">
+			<div class="column">
+				<div class="columns">
+					<div class="column">
+						<h4 class="subtitle"><%= @record.title %></h4>
+						<p><%= @record.description %></p>
+
+					</div>
+				</div>
+				<div class="column">
+					<div class="columns">
+						<div class="column">
+							<h4 class="subtitle">Issues</h4>
+						</div>
+						<div class="column is-4">
+							<% if @record.issue.length > 0 %>
+							<%= pagy_bulma_nav(@pagy).html_safe %>
+							<% end %>
+						</div>
+					</div>
+					<% if @record.issue.length > 0 %>
+					<div class="columns">
+						<div class="column">
+							<table class="table is-striped is-fullwidth is-bordered">
+								<tbody>
+									<% @records.each do |s| %>
+									<tr>
+										<td width="5%"><%= fa_icon "folder" %></td>
+										<td width="30%"><%= s.title %></td>
+										<td><%= s.description %></td>
+										<td class="level-right">
+											<%= link_to view_issue_path(s.uuid)  do %>
+											<%= fa_icon "edit" %>
+											<% end %>
+										</td>
+									</tr>
+									<% end %>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<% else %>
+					<div class="columns">
+						<div class="column">
+							<h4>No issues.</h4>
+						</div>
+					</div>
+					<% end %>
+					
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

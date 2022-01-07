@@ -1,2 +1,0 @@
-class ScopesController < ApplicationController
-end

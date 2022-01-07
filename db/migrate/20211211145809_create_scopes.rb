@@ -1,9 +1,12 @@
 class CreateScopes < ActiveRecord::Migration[6.1]
   def change
     create_table :scopes do |t|
-      t.text :url
+      t.string :uuid
+      t.string :title
       t.text :description
       t.string :version
+
+      t.belongs_to :project, null: false, foreign_key: false
 
       t.timestamps
     end

@@ -29,10 +29,14 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'devise'
-gem 'bulma-sass', '~> 0.9.1'
+gem 'bulma-rails'
 gem 'simple_form', '~> 5.1.0'
 gem 'font-awesome-rails'
 gem 'image_processing', '~> 1.2'
+
+gem 'pagy', '~> 5.6' # omit patch digit
+
+
 
 
 group :development, :test do

@@ -1,0 +1,57 @@
+<div class="columns">
+	<div class="column">
+		<div class="columns">
+			<div class="column">
+				<%= link_to new_scope_path(uuid: @record.uuid), class: "button is-primary is-outlined"  do %>
+					<%= fa_icon "pencil" %>&nbsp;Add scope
+				<% end %>
+			</div>
+		</div>
+
+		<div class="columns">
+			<div class="column">
+				<div class="columns">
+					<div class="column">
+						<h4 class="subtitle"><%= @record.title %></h4>
+						<p><%= @record.description %></p>
+
+						<hr />
+					</div>
+				</div>
+				<div class="column">
+					<div class="columns">
+						<div class="column">
+							<h4 class="subtitle">Scopes</h4>
+						</div>
+						<div class="column is-4">
+							<%= pagy_bulma_nav(@pagy).html_safe %>
+						</div>
+					</div>
+					<div class="columns">
+						<div class="column">
+							<table class="table is-striped is-fullwidth is-bordered">
+								<tbody>
+									<% @records.each do |s| %>
+									<tr>
+										<td width="5%"><%= fa_icon "folder" %></td>
+										<td width="30%"><%= s.title %></td>
+										<td width="5%"><%= s.version %></td>
+										<td><%= s.description %></td>
+										<td class="level-right">
+											<%= link_to view_scope_path(s.uuid)  do %>
+											<%= fa_icon "edit" %>
+											<% end %>
+										</td>
+									</tr>
+									<% end %>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

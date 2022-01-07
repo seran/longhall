@@ -2,9 +2,8 @@
 	<div class="column">
 		<div class="tabs">
 			<ul>
-				<li class="<%= current_class?(admin_general_page_path) %>"><%= link_to "General", admin_general_page_path, class: "" %></li>
-				<li class="<%= current_class?(admin_users_page_path) %>"><%= link_to "Users", admin_users_page_path, class: "" %></li>
-				<li class="<%= current_class?(admin_teams_page_path) %>"><%= link_to "Teams", admin_teams_page_path, class: "" %></li>
+				<li class="<%= current(admin_general_page_path) %>"><%= link_to "General", admin_general_page_path, class: "" %></li>
+				<li class="<%= current(admin_users_page_path) %>"><%= link_to "Users", admin_users_page_path, class: "" %></li>
 			</ul>
 		</div>
 	</div>
