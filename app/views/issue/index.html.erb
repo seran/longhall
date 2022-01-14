@@ -60,20 +60,20 @@
 						<table class="table is-striped is-fullwidth is-bordered">
 							<thead>
 								<tr>
-									<th></th>
+									<th style="width: 36px"></th>
 									<th>Title</th>
 									<th>Status</th>
 									<th>Severity</th>
-									<th>Score</th>
+									<th style="width: 40px">Score</th>
 									<th>Create at</th>
-									<th></th>
+									<th style="width: 36px"></th>
 								</tr>
 							</thead>
 							<tbody>
 								<% @records.each do |s| %>
 								<tr>
-									<td width="5%"><%= fa_icon "folder" %></td>
-									<td width="30%"><%= s.title %></td>
+									<td><%= fa_icon "folder" %></td>
+									<td><%= s.title %></td>
 									<td><%= s.status.capitalize %></td>
 									<td><%= s.severity.capitalize %></td>
 									<td><%= s.score %></td>
