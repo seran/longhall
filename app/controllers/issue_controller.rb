@@ -4,20 +4,25 @@ class IssueController < ApplicationController
 	before_action :set_record, only: [:view, :edit, :update, :delete]
 
 	def index
-		if !params[:search].blank?
-			@parameter = params[:search].downcase
-			search_query = Issue.all.where("lower(title) LIKE :search", search: "%#{@parameter}%")
-			@open_records = search_query.where("status = 0").size
-			@closed_records = search_query.where("status = 1").size
-			@inprogress_records = search_query.where("status = 2").size
-			@pagy, @records = pagy(search_query.order('id desc'), items: 5)
-		else
-			all_records_query = Issue.all
-			@open_records = all_records_query.where("status = 0").size
-			@closed_records = all_records_query.where("status = 1").size
-			@inprogress_records = all_records_query.where("status = 2").size
-			@pagy, @records = pagy(all_records_query.order('id desc'), items: 5)
-		end
+			query = Issue.where(nil)
+
+			if !params[:status].blank?
+				query = query.filter_by_status(params[:status]) if params[:status].present?
+			end
+
+			if !params[:severity].blank?
+				query = query.filter_by_severity(params[:severity]) if params[:severity].present?
+			end
+
+			if !params[:scope].blank?
+				query = query.filter_by_scope(params[:scope]) if params[:scope].present?
+			end
+
+			@open_records = query.where("status = 0").size
+			@closed_records = query.where("status = 1").size
+			@inprogress_records = query.where("status = 2").size
+			@pagy, @records = pagy(query.order('id desc'), items: 5)
+
 	end
 
 	def view
@@ -29,25 +34,25 @@ class IssueController < ApplicationController
 
 
 	def new
-		@scope = Scope.find_by(uuid: params[:uuid])
+		if !params[:uuid].nil?
+			@scope = Scope.find_by(uuid: params[:uuid])
 
-		if @scope.nil?
-			redirect_to root_path
-		else
 			@record = Issue.new
 			@record.scope_id = @scope.id
+
+			@scope_uuid = @scope.uuid
+		else
+			@record = Issue.new
+			@scope_uuid = nil
 		end
 	end
 
 	def create
-		@scope = Scope.find_by(uuid: params[:uuid])
-
-		if @scope.nil?
-			redirect_to root_path
-		else
-
 			@record = Issue.new(request_params)
-			@record.scope_id = @scope.id
+			if !params[:uuid].nil?
+				@scope = Scope.find_by(uuid: params[:uuid])
+				@record.scope_id = @scope.id
+			end
 			@record.user_id = current_user.id
 			@record.save!
 
@@ -56,7 +61,6 @@ class IssueController < ApplicationController
 			else
 				redirect_to({:controller => "issue", :action => "index"}, notice: 'Unable to save, try again.' )
 			end
-		end
 	end
 
 	def edit
@@ -95,7 +99,7 @@ class IssueController < ApplicationController
 	end
 
 	def request_params
-		params.require(:issue).permit(:title, :issue, :description, :score, :severity, :status)
+		params.require(:issue).permit(:title, :issue, :description, :score, :severity, :status, :scope_id)
 	end
 
 end

@@ -21,8 +21,8 @@ Rails.application.routes.draw do
   get '/scopes/view/:uuid', to: 'scope#view', as: 'view_scope'
 
   get '/issues', to: 'issue#index', as: 'issues_list'
-  get '/issues/create/:uuid', to: 'issue#new', as: 'new_issue'
-  post '/issues/create/:uuid', to: 'issue#create', as: 'create_issue'
+  get '/issues/create/(:uuid)', to: 'issue#new', as: 'new_issue'
+  post '/issues/create/(:uuid)', to: 'issue#create', as: 'create_issue'
   get '/issues/view/:uuid', to: 'issue#view', as: 'view_issue'
 
 

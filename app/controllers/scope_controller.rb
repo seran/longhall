@@ -14,7 +14,7 @@ class ScopeController < ApplicationController
 
 	def view
 		if @record.issue.length > 0
-			@pagy, @records = pagy(@record.issue, items: 2)
+			@pagy, @records = pagy(@record.issue.order('id desc'), items: 2)
 		end
 	end
 
@@ -39,6 +39,7 @@ class ScopeController < ApplicationController
 
 			@record = Scope.new(request_params)
 			@record.project_id = @project.id
+			@record.user_id = current_user.id
 			@record.save!
 
 			if @record.valid?

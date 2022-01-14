@@ -10,6 +10,11 @@ class Issue < ApplicationRecord
 	has_many :comments
 	has_many :tag
 
+	scope :filter_by_status, -> (status) { where status: status }
+	scope :filter_by_severity, -> (severity) { where severity: severity }
+	scope :filter_by_title, -> (title) { where("title like ?", "%#{title}%") }
+	scope :filter_by_scope, -> (scope) { where scope_id: scope }
+
 	private
 	  def set_defaults
 			self.status ||= :open

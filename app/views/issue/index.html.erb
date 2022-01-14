@@ -19,16 +19,71 @@
 						<% end %>
 					</div>
 				</div>
-				<div class="columns">
-					<div class="column is-10">
-						<form method="get">
-							<input type="text" class="input is-small" name="search" placeholder="Search.." value="<%= params[:search] %>" />
-						</form>
+
+				<form method="get" action="<%= issues_list_path %>">
+
+					<div class="columns">
+						<div class="column is-3">
+							<input type="text" name="keyword" class="input is-small" />
+						</div>
+						<div class="column is-3">
+							<div class="field">
+								<div class="control">
+									<div class="select is-fullwidth is-small">
+										<select name="scope">
+											<option value=""></option>
+											<% Scope.all.each do |s| %>
+												<option value="<%= s[:id] %>"><%= s[:title] %></option>
+											<% end %>
+										</select>
+										</div>
+								</div>
+							</div>
+						</div>
+						<div class="column is-2">
+							<div class="field">
+								<div class="control">
+									<div class="select is-fullwidth is-small">
+										<select name="severity">
+											<option value=""></option>
+											<% Issue.severities.each do |s| %>
+												<option value="<%= s[0] %>"><%= s[0].capitalize %></option>
+											<% end %>
+										</select>
+										</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="column is-2">
+							<div class="field">
+								<div class="control">
+									<div class="select is-fullwidth is-small">
+										<select name="status">
+											<option value=""></option>
+											<% Issue.statuses.each do |s| %>
+												<option value="<%= s[0] %>"><%= s[0].capitalize %></option>
+											<% end %>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="column is-2">
+							<div class="field">
+								<div class="control">
+									<button class="button is-small is-fullwidth">
+										Filter
+									</button>
+								</div>
+							</div>
+						</div>
+
 					</div>
-					<div class="column">
-						<a href="#" class="button is-small is-primary is-outlined">New issue</a>
-					</div>
-				</div>
+				</form>
+
+
 				<div class="columns">
 					<div class="column">
 						<div class="field is-grouped is-grouped-multiline">
