@@ -1,0 +1,12 @@
+<%= simple_form_for (comment), {url: create_comment_url(record.uuid)} do |f| %>
+  <div class="field">
+    <div class="control">
+      <%= f.input :message, required: true, input_html: { rows: 3, class: "textarea"}, wrapper: false, label_html: { class: "label" }, error_html: { class: "help is-danger" } %>
+    </div>
+  </div>
+  <div class="field is-grouped is-grouped-right">
+    <div class="control">
+      <%= f.button :submit, "Comment", class:"button is-primary is-fullwidth is-small" %>
+    </div>
+  </div>
+<% end %>

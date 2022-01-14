@@ -1,7 +1,7 @@
 class ScopeController < ApplicationController
 
 	before_action :authenticate_user!
-	before_action :set_record, only: [:view, :edit, :update, :delete, :delete_file]
+	before_action :set_record, only: [:view, :edit, :update, :delete]
 
 	def index
 		if !params[:search].blank?
@@ -78,6 +78,9 @@ class ScopeController < ApplicationController
 	private
 	def set_record
 		@record = Scope.find_by(uuid: params[:uuid])
+		if @record.nil?
+			redirect_to(root_path, notice: "No record found!")
+		end
 	end
 
 	def request_params

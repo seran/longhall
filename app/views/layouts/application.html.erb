@@ -43,8 +43,8 @@
 					<% end %>
 					
 					<% if user_signed_in? %>
-					<% if current_user.admin! %>
-					<%= link_to "Adminland", admin_general_page_path, class: "navbar-item #{current(admin_general_page_path)}" %>
+					<% if current_user.admin? %>
+						<%= link_to "Adminland", admin_general_page_path, class: "navbar-item #{current(admin_general_page_path)}" %>
 					<% end %>
 
 					<div class="navbar-item has-dropdown is-hoverable">

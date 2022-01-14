@@ -1,19 +1,32 @@
 class IssueController < ApplicationController
 
 	before_action :authenticate_user!
-	before_action :set_record, only: [:view, :edit, :update, :delete, :delete_file]
+	before_action :set_record, only: [:view, :edit, :update, :delete]
 
 	def index
 		if !params[:search].blank?
 			@parameter = params[:search].downcase
-			@pagy, @records = pagy(Issue.all.where("lower(title) LIKE :search", search: "%#{@parameter}%"), items: 1)
+			search_query = Issue.all.where("lower(title) LIKE :search", search: "%#{@parameter}%")
+			@open_records = search_query.where("status = 0").size
+			@closed_records = search_query.where("status = 1").size
+			@inprogress_records = search_query.where("status = 2").size
+			@pagy, @records = pagy(search_query, items: 5)
 		else
-			@pagy, @records = pagy(Issue.all, items: 1)
+			all_records_query = Issue.all
+			@open_records = all_records_query.where("status = 0").size
+			@closed_records = all_records_query.where("status = 1").size
+			@inprogress_records = all_records_query.where("status = 2").size
+			@pagy, @records = pagy(all_records_query, items: 5)
 		end
 	end
 
 	def view
+		@pagy, @comments = pagy(@record.comments, items: 3)
+
+		@comment = Comment.new
+		@comment.issue_id = @record.id
 	end
+
 
 	def new
 		@scope = Scope.find_by(uuid: params[:uuid])
@@ -75,10 +88,13 @@ class IssueController < ApplicationController
 	private
 	def set_record
 		@record = Issue.find_by(uuid: params[:uuid])
+		if @record.nil?
+			redirect_to(root_path, notice: "No record found!")
+		end
 	end
 
 	def request_params
-		params.require(:issue).permit(:title, :issue, :description, :score, :severity, :status, files: [])
+		params.require(:issue).permit(:title, :issue, :description, :score, :severity, :status)
 	end
 
 end

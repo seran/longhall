@@ -13,7 +13,7 @@
 					<div class="column">
 						<p class="has-text-weight-semibold">Issues (<%= @records.length %>)</p>
 					</div>
-					<div class="column is-3">
+					<div class="column is-5">
 						<% if @records.length > 0 %>
 						<%= render partial: 'pagy/bulma_nav', locals: {pagy: @pagy} %>
 						<% end %>
@@ -35,21 +35,21 @@
 							<div class="control">
 								<div class="tags has-addons">
 									<span class="tag is-dark">Open</span>
-									<span class="tag is-info">3</span>
+									<span class="tag is-info"><%= @open_records %></span>
 								</div>
 							</div>
 
 							<div class="control">
 								<div class="tags has-addons">
 									<span class="tag is-dark">Closed</span>
-									<span class="tag is-success">10</span>
+									<span class="tag is-success"><%= @closed_records %></span>
 								</div>
 							</div>
 
 							<div class="control">
 								<div class="tags has-addons">
 									<span class="tag is-dark">In progress</span>
-									<span class="tag is-primary">2</span>
+									<span class="tag is-primary"><%= @inprogress_records %></span>
 								</div>
 							</div>
 						</div>
@@ -62,7 +62,9 @@
 								<tr>
 									<th></th>
 									<th>Title</th>
-									<th>Descrption</th>
+									<th>Status</th>
+									<th>Severity</th>
+									<th>Score</th>
 									<th></th>
 								</tr>
 							</thead>
@@ -71,9 +73,11 @@
 								<tr>
 									<td width="5%"><%= fa_icon "folder" %></td>
 									<td width="30%"><%= s.title %></td>
-									<td><%= s.description %></td>
+									<td><%= s.status.capitalize %></td>
+									<td><%= s.severity.capitalize %></td>
+									<td><%= s.score %></td>
 									<td class="level-right">
-										<%= link_to view_scope_path(s.uuid)  do %>
+										<%= link_to view_issue_path(s.uuid)  do %>
 										<%= fa_icon "folder-open-o" %>
 										<% end %>
 									</td>

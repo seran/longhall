@@ -69,6 +69,9 @@ class ProjectController < ApplicationController
 	private
 	def set_record
 		@record = Project.find_by(uuid: params[:uuid])
+		if @record.nil?
+			redirect_to(root_path, notice: "No record found!")
+		end
 	end
 
 	def request_params

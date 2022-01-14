@@ -23,10 +23,10 @@ ActiveRecord::Schema.define(version: 2021_12_11_150021) do
   create_table "issues", charset: "utf8mb4", force: :cascade do |t|
     t.string "uuid"
     t.string "title"
-    t.string "severity"
+    t.integer "severity"
+    t.integer "status"
     t.float "score"
     t.text "description"
-    t.string "status"
     t.text "solution"
     t.bigint "scope_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 2021_12_11_150021) do
   end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name", default: ""
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

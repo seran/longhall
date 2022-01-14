@@ -4,9 +4,28 @@
 
 		<div class="columns">
 			<div class="column">
-				<% @users.each do |user| %>
-				<%= user.email %>
-				<% end %>
+				<table class="table is-fullwidth is-striped is-bordered">
+					<thead>
+					<tr>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Role</th>
+						<th>Status</th>
+						<th></th>
+					</tr>
+					</thead>
+					<tbody>
+					<% @users.each do |user| %>
+						<tr>
+							<td><%= user.name %></td>
+							<td><%= user.email %></td>
+							<td><%= user.role %></td>
+							<td><%= user.email %></td>
+							<td></td>
+						</tr>
+					<% end %>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>

@@ -3,10 +3,10 @@ class CreateIssues < ActiveRecord::Migration[6.1]
     create_table :issues do |t|
       t.string :uuid
       t.string :title
-      t.string :severity
+      t.integer :severity
+      t.integer :status
       t.float :score
       t.text :description
-      t.string :status
       t.text :solution
 
       t.belongs_to :scope, null: false, foreign_key: false

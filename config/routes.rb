@@ -24,6 +24,9 @@ Rails.application.routes.draw do
   get '/issues/create/:uuid', to: 'issue#new', as: 'new_issue'
   post '/issues/create/:uuid', to: 'issue#create', as: 'create_issue'
   get '/issues/view/:uuid', to: 'issue#view', as: 'view_issue'
+
+
+  post '/comments/create/:uuid', to: 'comment#create', as: 'create_comment'
   
   get '/admin', to: 'admin/general#index', as: 'admin_general_page'
   get '/admin/users', to: 'admin/users#index', as: 'admin_users_page'

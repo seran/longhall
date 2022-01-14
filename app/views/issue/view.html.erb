@@ -2,13 +2,81 @@
 	<div class="column">
 		<div class="columns">
 			<div class="column">
-				<%= @record.title %>
-				<%= @record.description %>
+				<%= link_to :back, class: "button is-primary is-outlined is-small"  do %>
+					<%= fa_icon "angle-left" %>&nbsp;Back
+				<% end %>
+			</div>
+		</div>
+
+		<div class="columns">
+			<div class="column">
+				<p class="has-text-weight-semibold">Details</p>
+			</div>
+		</div>
+
+		<div class="columns">
+			<div class="column">
+				<table class="table is-striped is-fullwidth is-bordered">
+					<tbody>
+					<tr>
+						<td width="25%">Title</td>
+						<td><%= @record.title %></td>
+					</tr>
+					<tr>
+						<td>Description</td>
+						<td><%= @record.description %></td>
+					</tr>
+					<tr>
+						<td>Score</td>
+						<td><%= @record.score %></td>
+					</tr>
+					<tr>
+						<td>Severity</td>
+						<td><%= @record.severity.capitalize %></td>
+					</tr>
+					<tr>
+						<td>Status</td>
+						<td><%= @record.status.capitalize %></td>
+					</tr>
+					<tr>
+						<td>Solution</td>
+						<td><%= @record.solution %></td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="columns">
+			<div class="column">
+				<p class="has-text-weight-semibold">Comments</p>
+			</div>
+			<div class="column is-5">
+				<% if @comments.length > 0 %>
+					<%= render partial: 'pagy/bulma_nav', locals: {pagy: @pagy} %>
+				<% end %>
 			</div>
 		</div>
 		<div class="columns">
 			<div class="column">
-
+				<table class="table is-striped is-bordered is-fullwidth">
+					<tbody>
+					<tr>
+						<td><%= render partial: '/issue/comment', locals: {comment: @comment, record: @record} %></td>
+					</tr>
+					<% if @comments.length > 0 %>
+						<% @comments.each do |c| %>
+							<tr>
+								<td><%= c.message %></td>
+							</tr>
+						<% end %>
+					<% else %>
+						<tr>
+							<td>No comments</td>
+						</tr>
+					<% end %>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
