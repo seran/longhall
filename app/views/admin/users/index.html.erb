@@ -11,7 +11,6 @@
 						<th>Name</th>
 						<th>Email</th>
 						<th>Role</th>
-						<th>Status</th>
 						<th></th>
 					</tr>
 					</thead>
@@ -21,11 +20,10 @@
 							<td style="width: 36px"><%= fa_icon "user" %></td>
 							<td><%= user.name %></td>
 							<td><%= user.email %></td>
-							<td><%= user.role %></td>
-							<td><%= user.email %></td>
+							<td><%= user.role.capitalize %></td>
 							<td style="width: 36px">
 								<%= link_to root_path do %>
-									<%= fa_icon "folder-open-o" %>
+									<%= fa_icon "user-o" %>
 								<% end %>
 							</td>
 						</tr>

@@ -24,16 +24,16 @@
 
 					<div class="columns">
 						<div class="column is-3">
-							<input type="text" name="keyword" class="input is-small" />
+							<input type="text" name="keyword" class="input is-small" placeholder="Search title.." />
 						</div>
 						<div class="column is-3">
 							<div class="field">
 								<div class="control">
 									<div class="select is-fullwidth is-small">
 										<select name="scope">
-											<option value=""></option>
+											<option value="">--</option>
 											<% Scope.all.each do |s| %>
-												<option value="<%= s[:id] %>"><%= s[:title] %></option>
+												<option value="<%= s[:uuid] %>" <% if params[:scope] == s[:uuid] %>selected<% end %>><%= s[:title] %></option>
 											<% end %>
 										</select>
 										</div>
@@ -45,9 +45,9 @@
 								<div class="control">
 									<div class="select is-fullwidth is-small">
 										<select name="severity">
-											<option value=""></option>
+											<option value="">--</option>
 											<% Issue.severities.each do |s| %>
-												<option value="<%= s[0] %>"><%= s[0].capitalize %></option>
+												<option value="<%= s[0] %>" <% if params[:severity] == s[0] %>selected<% end %>><%= s[0].capitalize %></option>
 											<% end %>
 										</select>
 										</div>
@@ -60,9 +60,9 @@
 								<div class="control">
 									<div class="select is-fullwidth is-small">
 										<select name="status">
-											<option value=""></option>
+											<option value="">--</option>
 											<% Issue.statuses.each do |s| %>
-												<option value="<%= s[0] %>"><%= s[0].capitalize %></option>
+												<option value="<%= s[0] %>" <% if params[:status] == s[0] %>selected<% end %>><%= s[0].capitalize %></option>
 											<% end %>
 										</select>
 									</div>
@@ -116,6 +116,7 @@
 							<thead>
 								<tr>
 									<th style="width: 36px"></th>
+									<th>#</th>
 									<th>Title</th>
 									<th>Status</th>
 									<th>Severity</th>
@@ -125,19 +126,26 @@
 								</tr>
 							</thead>
 							<tbody>
+								<% if @records.length > 0 %>
 								<% @records.each do |s| %>
 								<tr>
 									<td><%= fa_icon "folder" %></td>
+									<td><%= s.sequence_number %></td>
 									<td><%= s.title %></td>
 									<td><%= s.status.capitalize %></td>
 									<td><%= s.severity.capitalize %></td>
 									<td><%= s.score %></td>
-									<td><%= distance_of_time_in_words_to_now(s.created_at) %></td>
+									<td><%= distance_of_time_in_words_to_now(s.created_at) %> ago</td>
 									<td class="level-right">
 										<%= link_to view_issue_path(s.uuid)  do %>
 											<%= fa_icon "folder-open-o" %>
 										<% end %>
 									</td>
+								</tr>
+								<% end %>
+								<% else %>
+								<tr>
+									<td colspan="7" class="has-text-centered">No records to show</td>
 								</tr>
 								<% end %>
 							</tbody>
