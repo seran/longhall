@@ -4,6 +4,7 @@ class CreateComments < ActiveRecord::Migration[6.1]
       t.text :message
 
       t.belongs_to :issue, null: false, foreign_key: false
+      t.belongs_to :user, null: false, foreign_key: false
 
       t.timestamps
     end

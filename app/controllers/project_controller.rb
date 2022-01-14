@@ -29,7 +29,7 @@ class ProjectController < ApplicationController
 
 	def create
 		@record = Project.new(request_params)
-		# @record.user_id = current_user.id
+		@record.user_id = current_user.id
 		@record.save!
 
 		if @record.valid?

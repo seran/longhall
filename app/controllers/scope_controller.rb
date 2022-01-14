@@ -25,6 +25,7 @@ class ScopeController < ApplicationController
 			redirect_to root_path
 		else
 			@record = Scope.new
+			@record.user_id = current_user.id
 			@record.project_id = @project.id
 		end
 	end

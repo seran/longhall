@@ -7,6 +7,7 @@ class CreateScopes < ActiveRecord::Migration[6.1]
       t.string :version
 
       t.belongs_to :project, null: false, foreign_key: false
+      t.belongs_to :user, null: false, foreign_key: false
 
       t.timestamps
     end

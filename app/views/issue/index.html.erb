@@ -65,6 +65,7 @@
 									<th>Status</th>
 									<th>Severity</th>
 									<th>Score</th>
+									<th>Create at</th>
 									<th></th>
 								</tr>
 							</thead>
@@ -76,6 +77,7 @@
 									<td><%= s.status.capitalize %></td>
 									<td><%= s.severity.capitalize %></td>
 									<td><%= s.score %></td>
+									<td><%= distance_of_time_in_words_to_now(s.created_at) %></td>
 									<td class="level-right">
 										<%= link_to view_issue_path(s.uuid)  do %>
 										<%= fa_icon "folder-open-o" %>

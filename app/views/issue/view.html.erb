@@ -59,15 +59,16 @@
 		</div>
 		<div class="columns">
 			<div class="column">
-				<table class="table is-striped is-bordered is-fullwidth">
+				<table class="table is-striped is-fullwidth">
 					<tbody>
 					<tr>
-						<td><%= render partial: '/issue/comment', locals: {comment: @comment, record: @record} %></td>
+						<td colspan="2"><%= render partial: '/issue/comment', locals: {comment: @comment, record: @record} %></td>
 					</tr>
 					<% if @comments.length > 0 %>
 						<% @comments.each do |c| %>
 							<tr>
 								<td><%= c.message %></td>
+								<td width="30%" class="has-text-right"><span class="is-italic has-text-small">by @<%= c.user.name.downcase %> at <%= distance_of_time_in_words_to_now(c.created_at) %> ago</span></td>
 							</tr>
 						<% end %>
 					<% else %>

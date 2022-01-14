@@ -6,6 +6,8 @@ class CreateProjects < ActiveRecord::Migration[6.1]
       t.text :description
       t.integer :status
 
+      t.belongs_to :user, null: false, foreign_key: false
+
       t.timestamps
     end
   end

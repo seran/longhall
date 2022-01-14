@@ -4,6 +4,7 @@ class Project < ApplicationRecord
 	before_create :set_defaults
 
 	has_many :scope
+	belongs_to :user
 	
 	private
 	  def set_defaults

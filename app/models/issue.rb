@@ -3,6 +3,7 @@ class Issue < ApplicationRecord
 	enum severity: [:low, :medium, :high, :critical]
 
 	belongs_to :scope
+	belongs_to :user
 
 	before_create :set_defaults
 

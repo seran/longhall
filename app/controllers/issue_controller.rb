@@ -10,18 +10,18 @@ class IssueController < ApplicationController
 			@open_records = search_query.where("status = 0").size
 			@closed_records = search_query.where("status = 1").size
 			@inprogress_records = search_query.where("status = 2").size
-			@pagy, @records = pagy(search_query, items: 5)
+			@pagy, @records = pagy(search_query.order('id desc'), items: 5)
 		else
 			all_records_query = Issue.all
 			@open_records = all_records_query.where("status = 0").size
 			@closed_records = all_records_query.where("status = 1").size
 			@inprogress_records = all_records_query.where("status = 2").size
-			@pagy, @records = pagy(all_records_query, items: 5)
+			@pagy, @records = pagy(all_records_query.order('id desc'), items: 5)
 		end
 	end
 
 	def view
-		@pagy, @comments = pagy(@record.comments, items: 3)
+		@pagy, @comments = pagy(@record.comments.order('id desc'), items: 3)
 
 		@comment = Comment.new
 		@comment.issue_id = @record.id
@@ -48,6 +48,7 @@ class IssueController < ApplicationController
 
 			@record = Issue.new(request_params)
 			@record.scope_id = @scope.id
+			@record.user_id = current_user.id
 			@record.save!
 
 			if @record.valid?

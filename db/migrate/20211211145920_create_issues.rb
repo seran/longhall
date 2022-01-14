@@ -10,6 +10,7 @@ class CreateIssues < ActiveRecord::Migration[6.1]
       t.text :solution
 
       t.belongs_to :scope, null: false, foreign_key: false
+      t.belongs_to :user, null: false, foreign_key: false
 
       t.timestamps
     end

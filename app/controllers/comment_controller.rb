@@ -10,6 +10,7 @@ class CommentController < ApplicationController
     else
 
       @record = Comment.new(request_params)
+      @record.user_id = current_user.id
       @record.issue_id = @issue.id
       @record.save
 
