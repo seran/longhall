@@ -38,12 +38,23 @@
 						<td>Status</td>
 						<td><%= @record.status.capitalize %></td>
 					</tr>
-					<tr>
-						<td>Solution</td>
-						<td><%= @record.solution %></td>
-					</tr>
 					</tbody>
 				</table>
+			</div>
+		</div>
+
+		<div class="columns">
+			<div class="column">
+				<div class="columns">
+					<div class="column">
+						<p class="has-text-weight-semibold">Solution</p>
+					</div>
+				</div>
+				<div class="columns">
+					<div class="column is-5">
+						<%= @record.solution %>
+					</div>
+				</div>
 			</div>
 		</div>
 

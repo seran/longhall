@@ -7,6 +7,7 @@
 				<table class="table is-fullwidth is-striped is-bordered">
 					<thead>
 					<tr>
+						<th></th>
 						<th>Name</th>
 						<th>Email</th>
 						<th>Role</th>
@@ -17,11 +18,16 @@
 					<tbody>
 					<% @users.each do |user| %>
 						<tr>
+							<td style="width: 36px"><%= fa_icon "user" %></td>
 							<td><%= user.name %></td>
 							<td><%= user.email %></td>
 							<td><%= user.role %></td>
 							<td><%= user.email %></td>
-							<td></td>
+							<td style="width: 36px">
+								<%= link_to root_path do %>
+									<%= fa_icon "folder-open-o" %>
+								<% end %>
+							</td>
 						</tr>
 					<% end %>
 					</tbody>

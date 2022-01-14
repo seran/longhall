@@ -25,7 +25,7 @@
 						<table class="table is-fullwidth is-striped is-bordered">
 							<tbody>
 								<tr>
-									<td width="25%">Title</td>
+									<td style="width: 25%">Title</td>
 									<td><%= @record.title %></td>
 								</tr>
 								<tr>
@@ -52,12 +52,18 @@
 						<div class="columns">
 							<div class="column">
 								<table class="table is-striped is-fullwidth is-bordered">
+									<thead>
+										<tr>
+											<th style="width: 36px"></th>
+											<th>Title</th>
+											<th style="width: 36px"></th>
+										</tr>
+									</thead>
 									<tbody>
 										<% @records.each do |s| %>
 										<tr>
-											<td width="5%"><%= fa_icon "folder" %></td>
-											<td width="30%"><%= s.title %></td>
-											<td><%= s.description %></td>
+											<td><%= fa_icon "folder" %></td>
+											<td><%= s.title %></td>
 											<td class="level-right">
 												<%= link_to view_issue_path(s.uuid)  do %>
 												<%= fa_icon "folder-open-o" %>
