@@ -72,19 +72,19 @@
 				<div class="column is-10">
 					<% if flash[:notice] %>
 					<div class="notification is-primary global-notification">
-						<p class="notice"><%= notice %></p>
+						<p><%= notice %></p>
 					</div>
 					<% end %>
 					<% if flash[:errors] %>
 					<% flash[:errors].each do |error| %>
 					<div class="notification is-danger global-notification">
-						<p class="notice"><%= error %></p>
+						<p><%= error %></p>
 					</div>
 					<% end %>
 					<% end %>
 					<% if flash[:alert] %>
 					<div class="notification is-warning global-notification">
-						<p class="alert"><%= alert %></p>
+						<p><%= alert %></p>
 					</div>
 					<% end %>
 				</div>

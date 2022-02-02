@@ -1,9 +1,9 @@
 <section class="section">
 	<div class="columns">
 		<div class="column is-5">
-			<h4 class="title">New issue</h4>
+			<h4 class="title">Edit issue <%= @record.sequence_number %></h4>
 			<hr />
-			<%= simple_form_for (@record), {url: create_issue_path(@scope_uuid)} do |f| %>
+			<%= simple_form_for (@record), {url: update_issue_path(@record.uuid)} do |f| %>
 			<% if !f.error_notification.nil? %>
 				<div class="field">
 					<div class="control">
@@ -58,7 +58,7 @@
 					<%= link_to "Cancel", :back, class: "button is-primary is-outlined is-small" %>
 				</div>
 				<div class="control">
-					<%= f.button :submit, "Create", class:"button is-primary is-fullwidth is-small" %>
+					<%= f.button :submit, "Update", class:"button is-primary is-fullwidth is-small" %>
 				</div>
 			</div>
 			<% end %>

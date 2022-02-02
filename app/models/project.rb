@@ -5,6 +5,9 @@ class Project < ApplicationRecord
 
 	has_many :scope
 	belongs_to :user
+
+	validates :title, presence: true
+
 	
 	private
 	  def set_defaults

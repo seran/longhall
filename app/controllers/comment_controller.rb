@@ -12,12 +12,12 @@ class CommentController < ApplicationController
       @record = Comment.new(request_params)
       @record.user_id = current_user.id
       @record.issue_id = @issue.id
-      @record.save
 
       if @record.valid?
+        @record.save!
         redirect_to(view_issue_path(@issue.uuid), notice: 'Comment added successfully.' )
       else
-        redirect_to(root_path, notice: 'Unable to save, try again.' )
+        redirect_to(view_issue_path(@issue.uuid), alert: 'Comment can not be blank.')
       end
     end
   end

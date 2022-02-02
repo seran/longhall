@@ -2,6 +2,8 @@ class ProjectController < ApplicationController
 
 	before_action :authenticate_user!
 	before_action :set_record, only: [:view, :edit, :update, :delete, :delete_file]
+	before_action :check_lead, only: [:new, :create, :edit, :update]
+	before_action :check_admin, only: [:new, :create, :edit, :update]
 
 	def index
 		# @page = params.fetch(:page, 0).to_i
@@ -30,12 +32,15 @@ class ProjectController < ApplicationController
 	def create
 		@record = Project.new(request_params)
 		@record.user_id = current_user.id
-		@record.save!
 
 		if @record.valid?
+			@record.save!
 			redirect_to(new_scope_path(@record.uuid), notice: 'Created successfully.' )
 		else
-			redirect_to({:controller => "project", :action => "index"}, notice: 'Unable to save, try again.' )
+			# redirect_to({:controller => "project", :action => "index"}, notice: 'Unable to save, try again.' )
+			# flash[:errors] = @record.errors.full_messages
+			# redirect_to new_project_path
+			render :new
 		end
 	end
 

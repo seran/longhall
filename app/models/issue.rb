@@ -7,6 +7,10 @@ class Issue < ApplicationRecord
 
 	before_create :set_defaults
 
+	validates :title, presence: true
+	validates :severity, presence: true
+	validates :description, presence: true
+
 	has_many :comments
 	has_many :tag
 

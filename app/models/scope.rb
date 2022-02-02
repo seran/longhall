@@ -5,6 +5,9 @@ class Scope < ApplicationRecord
 	has_many :issue
 
 	before_create :set_defaults
+
+	validates :title, presence: true
+	validates :version, presence: true
 	
 	private
 	  def set_defaults

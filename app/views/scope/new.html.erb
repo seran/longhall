@@ -4,7 +4,13 @@
 			<h4 class="title">New scope</h4>
 			<hr />
 			<%= simple_form_for (@record), {url: create_scope_url(@project.uuid)} do |f| %>
-				<%= f.error_notification %>
+			<% if !f.error_notification.nil? %>
+				<div class="field">
+					<div class="control">
+						<%= f.error_notification %>
+					</div>
+				</div>
+			<% end %>
 			<div class="field">
 				<div class="control">
 					<%= f.input :title, required: true, input_html: { class: "input"}, wrapper: false, label_html: { class: "label" }, error_html: { class: "help is-danger" } %>
@@ -24,7 +30,7 @@
 
 			<div class="field is-grouped is-grouped-right">
 				<div class="control">
-					<%= link_to "Cancel", projects_list_path, class: "button is-primary is-outlined" %>
+					<%= link_to "Cancel", :back, class: "button is-primary is-outlined" %>
 				</div>
 				<div class="control">
 					<%= f.button :submit, "Add scope to the project", class:"button is-primary is-fullwidth" %>

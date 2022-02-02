@@ -5,6 +5,9 @@
 				<%= link_to :back, class: "button is-primary is-outlined is-small"  do %>
 					<%= fa_icon "angle-left" %>&nbsp;Back
 				<% end %>
+				<%= link_to edit_issue_path(@record.uuid), class: "button is-primary is-outlined is-small" do %>
+						<%= fa_icon "pencil" %>&nbsp;Edit issue
+					<% end %>
 			</div>
 			<div class="column is-6">
 				<p class="has-text-right has-text-weight-semibold">#<%= @record.sequence_number %></p>
@@ -30,10 +33,6 @@
 						<td><%= @record.title %></td>
 					</tr>
 					<tr>
-						<td>Description</td>
-						<td><%= @record.description %></td>
-					</tr>
-					<tr>
 						<td>Score</td>
 						<td><%= @record.score %></td>
 					</tr>
@@ -54,12 +53,34 @@
 			<div class="column">
 				<div class="columns">
 					<div class="column">
+						<p class="has-text-weight-semibold">Description</p>
+					</div>
+				</div>
+				<div class="columns">
+					<div class="column">
+						<% if !@record.description.nil? %>
+							<%= @record.description %>
+						<% else %>
+							...
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="columns">
+			<div class="column">
+				<div class="columns">
+					<div class="column">
 						<p class="has-text-weight-semibold">Solution</p>
 					</div>
 				</div>
 				<div class="columns">
-					<div class="column is-5">
-						<%= @record.solution %>
+					<div class="column">
+						<% if !@record.solution.nil? %>
+							<%= @record.solution %>
+						<% else %>
+							...
+						<% end %>
 					</div>
 				</div>
 			</div>

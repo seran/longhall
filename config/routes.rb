@@ -24,6 +24,9 @@ Rails.application.routes.draw do
   get '/issues/create/(:uuid)', to: 'issue#new', as: 'new_issue'
   post '/issues/create/(:uuid)', to: 'issue#create', as: 'create_issue'
   get '/issues/view/:uuid', to: 'issue#view', as: 'view_issue'
+  get '/issues/edit/:uuid', to: 'issue#edit', as: 'edit_issue'
+  patch '/issues/edit/:uuid', to: 'issue#update', as: 'update_issue'
+  # patch '/issues/add/solution/:uuid', to: 'issue#add_solution', as: 'add_solution'
 
 
   post '/comments/create/:uuid', to: 'comment#create', as: 'create_comment'

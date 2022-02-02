@@ -40,12 +40,13 @@ class ScopeController < ApplicationController
 			@record = Scope.new(request_params)
 			@record.project_id = @project.id
 			@record.user_id = current_user.id
-			@record.save!
 
 			if @record.valid?
+				@record.save!
 				redirect_to(view_scope_path(@record.uuid), notice: 'Scope created successfully.' )
 			else
-				redirect_to({:controller => "issue", :action => "index"}, notice: 'Unable to save, try again.' )
+				# redirect_to({:controller => "issue", :action => "index"}, notice: 'Unable to save, try again.' )
+				render :new
 			end
 		end
 	end
