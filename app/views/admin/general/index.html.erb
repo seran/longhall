@@ -4,8 +4,6 @@
 
 		<div class="columns">
 			<div class="column is-6">
-				<h4 class="subtitle">System settings</h4>
-			<hr />
 
 			<%= simple_form_for (@record), {url: update_settings_path} do |f| %>
 				<% if !f.error_notification.nil? %>
