@@ -10,4 +10,20 @@ class Admin::UsersController < ApplicationController
 			@users = User.all()
 		end
 	end
+
+	def new
+	end
+
+	def create
+	end
+
+	def edit
+	end
+
+	def update
+	end
+
+	private
+	def set_record
+	end
 end

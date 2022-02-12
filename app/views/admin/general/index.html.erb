@@ -3,7 +3,43 @@
 		<%= render "/admin/tab" %>
 
 		<div class="columns">
-			<div class="column">
+			<div class="column is-6">
+				<h4 class="subtitle">System settings</h4>
+			<hr />
+
+			<%= simple_form_for (@record), {url: update_settings_path} do |f| %>
+				<% if !f.error_notification.nil? %>
+					<div class="field">
+						<div class="control">
+							<%= f.error_notification %>
+						</div>
+					</div>
+				<% end %>
+				<div class="field">
+					<div class="control">
+						<%= f.input :slack, required: false, input_html: { rows: 3, class: "textarea"}, wrapper: false, label_html: { class: "label" }, error_html: { class: "help is-danger" } %>
+					</div>
+				</div>
+				<div class="field">
+					<div class="control">
+						<%= f.input :notify_new, as: :boolean, label_html: { class: "checkbox" }, wrapper: false, boolean_style: :inline %>
+					</div>
+				</div>
+				<div class="field">
+					<div class="control">
+						<%= f.input :notify_updates, as: :boolean, label_html: { class: "checkbox" }, wrapper: false %>
+					</div>
+				</div>
+				<hr />
+				<div class="field is-grouped is-grouped-right">
+					<div class="control">
+						<%= link_to "Cancel", :back, class: "button is-primary is-outlined is-small" %>
+					</div>
+					<div class="control">
+						<%= f.button :submit, "Save", class:"button is-primary is-small" %>
+					</div>
+				</div>
+			<% end %>
 				
 			</div>
 		</div>

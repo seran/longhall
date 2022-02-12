@@ -4,7 +4,7 @@ class CreateIssues < ActiveRecord::Migration[6.1]
       t.string :uuid
       t.string :title
       t.integer :severity
-      t.integer :status
+      t.integer :status, default: 0
       t.float :score
       t.text :description
       t.text :solution

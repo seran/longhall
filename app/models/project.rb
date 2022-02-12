@@ -1,5 +1,5 @@
 class Project < ApplicationRecord
-	enum status: [:open, :completed, :cancelled]
+	enum status: [:open, :closed, :ongoing, :cancelled]
 
 	before_create :set_defaults
 

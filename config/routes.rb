@@ -14,11 +14,15 @@ Rails.application.routes.draw do
   get '/projects/create', to: 'project#new', as: 'new_project'
   post '/projects/create', to: 'project#create', as: 'create_project'
   get '/projects/view/:uuid', to: 'project#view', as: 'view_project'
+  get '/projects/edit/:uuid', to: 'project#edit', as: 'edit_project'
+  patch '/projects/edit/:uuid', to: 'project#update', as: 'update_project'
 
   get '/scopes', to: 'scope#index', as: 'scopes_list'
   get '/scopes/create/:uuid', to: 'scope#new', as: 'new_scope'
   post '/scopes/create/:uuid', to: 'scope#create', as: 'create_scope'
   get '/scopes/view/:uuid', to: 'scope#view', as: 'view_scope'
+  get '/scopes/edit/:uuid', to: 'scope#edit', as: 'edit_scope'
+  patch '/scopes/edit/:uuid', to: 'scope#update', as: 'update_scope'
 
   get '/issues', to: 'issue#index', as: 'issues_list'
   get '/issues/create/(:uuid)', to: 'issue#new', as: 'new_issue'
@@ -26,12 +30,11 @@ Rails.application.routes.draw do
   get '/issues/view/:uuid', to: 'issue#view', as: 'view_issue'
   get '/issues/edit/:uuid', to: 'issue#edit', as: 'edit_issue'
   patch '/issues/edit/:uuid', to: 'issue#update', as: 'update_issue'
-  # patch '/issues/add/solution/:uuid', to: 'issue#add_solution', as: 'add_solution'
-
 
   post '/comments/create/:uuid', to: 'comment#create', as: 'create_comment'
   
   get '/admin', to: 'admin/general#index', as: 'admin_general_page'
+  patch '/admin/settings', to: 'admin/general#update', as: 'update_settings'
   get '/admin/users', to: 'admin/users#index', as: 'admin_users_page'
 
   get '/settings', to: 'settings#index', as: 'settings_page'

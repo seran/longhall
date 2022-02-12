@@ -43,25 +43,21 @@ class ScopeController < ApplicationController
 
 			if @record.valid?
 				@record.save!
-				redirect_to(view_scope_path(@record.uuid), notice: 'Scope created successfully.' )
+				redirect_to(view_scope_path(@record.uuid), notice: 'Successfully created.' )
 			else
-				# redirect_to({:controller => "issue", :action => "index"}, notice: 'Unable to save, try again.' )
 				render :new
 			end
 		end
 	end
 
 	def edit
-		if !current_user.id == @record.user_id
-			redirect_to({:controller => "issue", :action => "index", :uuid => @record.uuid}, notice: 'You can not edit this Scope.' )
-		end
 	end
 
 	def update
 		if @record.update(request_params)
-			redirect_to({:action => "show", :uuid => @record.uuid}, notice: 'Product was successfully updated.' )
+			redirect_to view_scope_path(@record.uuid), notice: 'Updated successfully.'
 		else
-			redirect_to({:controller => "issue", :action => "index"}, notice: 'Unable to save, try again.' )
+			redirect_to view_scope_path(@record.uuid), notice: 'Unable to save, try again.'
 		end
 	end
 

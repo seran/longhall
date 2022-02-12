@@ -3,7 +3,10 @@
 		<div class="columns">
 			<div class="column">
 				<%= link_to new_scope_path(uuid: @record.uuid), class: "button is-primary is-outlined is-small"  do %>
-				<%= fa_icon "pencil" %>&nbsp;Add scope
+					<%= fa_icon "pencil" %>&nbsp;Add scope
+				<% end %>
+				<%= link_to edit_project_path(@record.uuid), class: "button is-primary is-outlined is-small" do %>
+					<%= fa_icon "pencil" %>&nbsp;Edit project
 				<% end %>
 			</div>
 		</div>
@@ -27,6 +30,10 @@
 								<tr>
 									<td style="width: 25%">Title</td>
 									<td><%= @record.title %></td>
+								</tr>
+								<tr>
+									<td>Status</td>
+									<td><%= @record.status.capitalize %></td>
 								</tr>
 								<tr>
 									<td>Description</td>

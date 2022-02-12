@@ -3,7 +3,7 @@
 		<div class="columns">
 			<div class="column">
 				<div class="buttons">
-					<% if current_user.lead? or current_user.admin? %>
+					<% if is_super() == true %>
 						<%= link_to new_project_path, class: "button is-primary is-outlined is-small" do %>
 							<%= fa_icon "pencil" %>&nbsp;New project
 						<% end %>

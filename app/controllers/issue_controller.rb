@@ -1,7 +1,7 @@
 class IssueController < ApplicationController
 
 	before_action :authenticate_user!
-	before_action :set_record, only: [:view, :edit, :update, :delete, :add_solution]
+	before_action :set_record, only: [:view, :edit, :update, :delete]
 
 	def index
 			query = Issue.where(nil)
@@ -59,22 +59,16 @@ class IssueController < ApplicationController
 				@record.save!
 				redirect_to(view_issue_path(@record.uuid), notice: 'Issue created successfully.' )
 			else
-				# redirect_to({:controller => "issue", :action => "index"}, notice: 'Unable to save, try again.' )
-				# flash[:errors] = @record.errors.full_messages
-				# redirect_to (new_issue_path(params[:uuid]))
 				render :new
 			end
 	end
 
 	def edit
-		# if !current_user.id == @record.user_id
-		# 	redirect_to({:controller => "issue", :action => "index", :uuid => @record.uuid}, notice: 'You can not edit this Issue.' )
-		# end
 	end
 
 	def update
 		if @record.update(request_params)
-			redirect_to(view_issue_path(@record.uuid), notice: 'Successfully updated.' )
+			redirect_to(view_issue_path(@record.uuid), notice: 'Updated successfully.' )
 		else
 			redirect_to edit_issue_path(@record.uuid)
 		end
@@ -92,22 +86,6 @@ class IssueController < ApplicationController
 			redirect_to({:action => "show", :uuid => @record.uuid}, notice: 'Unable to delete.' )
 		end
 	end
-
-	# def add_solution
-
-	# 	if params[:issue[0]].nil?
-	# 		redirect_to view_issue_path(@record.uuid), alert: "Solution can not be blank."
-	# 	else
-	# 		@record.solution = params[:issue[0]]
-	# 		if @record.update!
-	# 			redirect_to view_issue_path(@record.uuid), notice: "Successfully saved"
-	# 		else
-	# 			redirect_to view_issue_path(@record.uuid), alert: "Unable to update now, try again."
-	# 		end
-
-	# 	end
-
-	# end
 
 	private
 	def set_record

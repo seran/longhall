@@ -4,7 +4,7 @@ class CreateProjects < ActiveRecord::Migration[6.1]
       t.string :uuid
       t.string :title
       t.text :description
-      t.integer :status
+      t.integer :status, default: 0
 
       t.belongs_to :user, null: false, foreign_key: false
 

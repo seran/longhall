@@ -7,4 +7,12 @@ module ApplicationHelper
     ''
   end
 
+  def is_super
+    if current_user.lead? || current_user.admin?
+      return true
+    end
+    
+    return false
+  end
+
 end

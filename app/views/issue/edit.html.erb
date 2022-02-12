@@ -22,34 +22,32 @@
 					</div>
 				</div>
 			<% end %>
-
-
 			<div class="field">
 				<div class="control">
 					<%= f.input :title, required: true, input_html: { class: "input"}, wrapper: false, label_html: { class: "label" }, error_html: { class: "help is-danger" } %>
 				</div>
 			</div>
-				<div class="field">
-					<div class="control">
-						<label class="label">Severity</label>
-						<div class="select is-fullwidth">
-							<%= f.input :severity, as: :select, collection: Issue.severities.map {|key, value| [key, Issue.severities.key(value).capitalize]}, input_html: { class: "select"}, label_method: :second, value_method: :first, label_html: { class: "label" }, error_html: { class: "help is-danger" }, wrapper: false, label: false %>
-						</div>
-					</div>
-				</div>
-				<div class="field">
-					<div class="control">
-						<%= f.input :score, required: true, input_html: { class: "input"}, wrapper: false, label_html: { class: "label" }, error_html: { class: "help is-danger" } %>
-					</div>
-				</div>
 			<div class="field">
 				<div class="control">
-					<%= f.input :description, required: true, input_html: { rows: 10, class: "textarea"}, wrapper: false, label_html: { class: "label" }, error_html: { class: "help is-danger" } %>
+					<label class="label">Severity</label>
+					<div class="select is-fullwidth">
+						<%= f.input :severity, as: :select, collection: Issue.severities.map {|key, value| [key, Issue.severities.key(value).capitalize]}, input_html: { class: "select"}, label_method: :second, value_method: :first, label_html: { class: "label" }, error_html: { class: "help is-danger" }, wrapper: false, label: false %>
+					</div>
 				</div>
 			</div>
 			<div class="field">
 				<div class="control">
-					<%= f.input :solution, required: true, input_html: { rows: 10, class: "textarea"}, wrapper: false, label_html: { class: "label" }, error_html: { class: "help is-danger" } %>
+					<%= f.input :score, required: true, input_html: { class: "input"}, wrapper: false, label_html: { class: "label" }, error_html: { class: "help is-danger" } %>
+				</div>
+			</div>
+			<div class="field">
+				<div class="control">
+					<%= f.input :description, required: false, input_html: { rows: 10, class: "textarea"}, wrapper: false, label_html: { class: "label" }, error_html: { class: "help is-danger" } %>
+				</div>
+			</div>
+			<div class="field">
+				<div class="control">
+					<%= f.input :solution, required: false, input_html: { rows: 10, class: "textarea"}, wrapper: false, label_html: { class: "label" }, error_html: { class: "help is-danger" } %>
 				</div>
 			</div>
 			<hr />

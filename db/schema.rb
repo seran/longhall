@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_11_150021) do
+ActiveRecord::Schema.define(version: 2022_02_05_121042) do
 
   create_table "comments", charset: "utf8mb4", force: :cascade do |t|
     t.text "message"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2021_12_11_150021) do
     t.string "uuid"
     t.string "title"
     t.integer "severity"
-    t.integer "status"
+    t.integer "status", default: 0
     t.float "score"
     t.text "description"
     t.text "solution"
@@ -38,11 +38,19 @@ ActiveRecord::Schema.define(version: 2021_12_11_150021) do
     t.index ["user_id"], name: "index_issues_on_user_id"
   end
 
+  create_table "options", charset: "utf8mb4", force: :cascade do |t|
+    t.text "slack"
+    t.boolean "notify_new"
+    t.boolean "notify_updates"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "projects", charset: "utf8mb4", force: :cascade do |t|
     t.string "uuid"
     t.string "title"
     t.text "description"
-    t.integer "status"
+    t.integer "status", default: 0
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -52,6 +60,7 @@ ActiveRecord::Schema.define(version: 2021_12_11_150021) do
   create_table "scopes", charset: "utf8mb4", force: :cascade do |t|
     t.string "uuid"
     t.string "title"
+    t.integer "status"
     t.text "description"
     t.string "version"
     t.bigint "project_id", null: false
@@ -73,7 +82,7 @@ ActiveRecord::Schema.define(version: 2021_12_11_150021) do
   end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
-    t.string "name", default: ""
+    t.string "name", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

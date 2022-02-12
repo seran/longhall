@@ -8,9 +8,11 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
-	def check_lead
-		if !current_user.lead?
-			redirect_to(root_path, notice: "You need leader access!")
+	def check_super
+		if current_user.lead? || current_user.admin?
+			return true
+		else
+			redirect_to(root_path, notice: "You need administrative access!")
 		end
 	end
 end

@@ -26,9 +26,9 @@ class Issue < ApplicationRecord
 	end
 
 	private
-	  def set_defaults
-			self.status ||= :open
+	def set_defaults
+		self.status ||= :open
 	    self.uuid = SecureRandom.uuid
-		end
+	end
 
 end

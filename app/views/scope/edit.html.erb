@@ -1,9 +1,9 @@
 <section class="section">
 	<div class="columns">
 		<div class="column is-5">
-			<h4 class="title">New scope</h4>
+			<h4 class="title">Update scope</h4>
 			<hr />
-			<%= simple_form_for (@record), {url: create_scope_url(@project.uuid)} do |f| %>
+			<%= simple_form_for (@record), {url: edit_scope_path(@record.uuid)} do |f| %>
 			<% if !f.error_notification.nil? %>
 				<div class="field">
 					<div class="control">
@@ -33,7 +33,7 @@
 					<%= link_to "Cancel", :back, class: "button is-primary is-outlined is-small" %>
 				</div>
 				<div class="control">
-					<%= f.button :submit, "Add scope to the project", class:"button is-primary is-fullwidth is-small" %>
+					<%= f.button :submit, "Update scope", class:"button is-primary is-fullwidth is-small" %>
 				</div>
 			</div>
 			<% end %>

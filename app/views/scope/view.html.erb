@@ -3,7 +3,10 @@
 		<div class="columns">
 			<div class="column">
 				<%= link_to new_issue_path(uuid: @record.uuid), class: "button is-primary is-outlined is-small"  do %>
-				<%= fa_icon "pencil" %>&nbsp;New issue
+					<%= fa_icon "pencil" %>&nbsp;New issue
+				<% end %>
+				<%= link_to edit_scope_path(@record.uuid), class: "button is-primary is-outlined is-small" do %>
+					<%= fa_icon "pencil" %>&nbsp;Edit scope
 				<% end %>
 			</div>
 		</div>

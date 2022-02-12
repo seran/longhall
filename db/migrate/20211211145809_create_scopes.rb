@@ -3,6 +3,7 @@ class CreateScopes < ActiveRecord::Migration[6.1]
     create_table :scopes do |t|
       t.string :uuid
       t.string :title
+      t.integer :status
       t.text :description
       t.string :version
 

@@ -2,17 +2,9 @@ class ProjectController < ApplicationController
 
 	before_action :authenticate_user!
 	before_action :set_record, only: [:view, :edit, :update, :delete, :delete_file]
-	before_action :check_lead, only: [:new, :create, :edit, :update]
-	before_action :check_admin, only: [:new, :create, :edit, :update]
+	before_action :check_super, only: [:new, :create, :edit, :update]
 
 	def index
-		# @page = params.fetch(:page, 0).to_i
-		# @records_per_page = 2
-
-		# if @page == -1
-		# 	@page = 0
-		# end
-
 		if !params[:search].blank?
 			@parameter = params[:search].downcase
 			@records = Project.all.where("lower(name) LIKE :search", search: "%#{@parameter}%")
@@ -37,24 +29,18 @@ class ProjectController < ApplicationController
 			@record.save!
 			redirect_to(new_scope_path(@record.uuid), notice: 'Created successfully.' )
 		else
-			# redirect_to({:controller => "project", :action => "index"}, notice: 'Unable to save, try again.' )
-			# flash[:errors] = @record.errors.full_messages
-			# redirect_to new_project_path
 			render :new
 		end
 	end
 
 	def edit
-		if !current_user.id == @record.user_id
-			redirect_to({:controller => "project", :action => "index"}, notice: 'You can not edit this Project.' )
-		end
 	end
 
 	def update
 		if @record.update(request_params)
-			redirect_to({:action => "show", :uuid => @record.uuid}, notice: 'Product was successfully updated.' )
+			redirect_to view_project_path(@record.uuid), notice: 'Updated successfully.'
 		else
-			redirect_to({:controller => "project", :action => "index"}, notice: 'Unable to save, try again.' )
+			redirect_to edit_project_path(@record.uuid), alert: 'Unable to save, try again.'
 		end
 	end
 
