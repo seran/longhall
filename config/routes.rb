@@ -33,9 +33,9 @@ Rails.application.routes.draw do
 
   post '/comments/create/:uuid', to: 'comment#create', as: 'create_comment'
   
-  get '/admin', to: 'admin/general#index', as: 'admin_general_page'
-  patch '/admin/settings', to: 'admin/general#update', as: 'update_settings'
-  get '/admin/users', to: 'admin/users#index', as: 'admin_users_page'
+  get '/adminland', to: 'admin/general#index', as: 'admin_general_page'
+  patch '/adminland/settings', to: 'admin/general#update', as: 'update_settings'
+  get '/adminland/users', to: 'admin/users#index', as: 'admin_users_page'
 
   get '/settings', to: 'settings#index', as: 'settings_page'
   get '/help', to: 'help#index', as: 'help_page'
