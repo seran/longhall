@@ -34,13 +34,14 @@
 					<% if user_signed_in? %>
 					<%= link_to projects_list_path, class: "navbar-item #{current(projects_list_path)}" do %>Projects<% end %>
 					<%= link_to issues_list_path, class: "navbar-item #{current(issues_list_path)}" do %>Issues<% end %>
-					<%= link_to new_issue_path, class: "navbar-item #{current(issues_list_path)}" do %>
-					<%= fa_icon "plus-circle" %>&nbsp;New issue
-					<% end %>
 					<% end %>
 				</div>
 
 				<div class="navbar-end">
+					<% if user_signed_in? %>
+					<%= link_to new_issue_path, class: "navbar-item #{current(new_issue_path)}" do %>New issue<% end %>
+					<% end %>
+
 					<%= link_to help_page_path, class: "navbar-item #{current(help_page_path)}" do %>
 					<%= fa_icon "question-circle" %>
 					<% end %>
