@@ -15,4 +15,3 @@ class SecureBlobsController < ApplicationController
 
 	end
 end
-end
