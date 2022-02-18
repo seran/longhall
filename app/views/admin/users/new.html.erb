@@ -1,1 +1,40 @@
-new.html.erb
+<section class="section">
+	<div class="columns">
+		<div class="column is-5">
+			<h4 class="title">New user</h4>
+			<hr />
+			<%= simple_form_for (@record), {url: create_user_path(@record)} do |f| %>
+			<% if !f.error_notification.nil? %>
+				<div class="field">
+					<div class="control">
+						<%= f.error_notification %>
+					</div>
+				</div>
+			<% end %>
+			<div class="field">
+				<div class="control">
+					<%= f.input :name, required: true, input_html: { class: "input"}, wrapper: false, label_html: { class: "label" }, error_html: { class: "help is-danger" } %>
+				</div>
+			</div>
+			
+			<div class="field">
+				<div class="control">
+					<%= f.input :email, required: true, input_html: { class: "input"}, wrapper: false, label_html: { class: "label" }, error_html: { class: "help is-danger" } %>
+				</div>
+			</div>
+			<hr />
+			<div class="field is-grouped is-grouped-right">
+				<div class="control">
+					<%= link_to "Cancel", :back, class: "button is-primary is-outlined is-small" %>
+				</div>
+				<div class="control">
+					<%= f.button :submit, "Create user", class:"button is-primary is-small" %>
+				</div>
+			</div>
+			<% end %>
+
+			<br>
+			<p class=""></p>
+		</div>
+	</div>
+</section>

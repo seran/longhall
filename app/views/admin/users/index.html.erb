@@ -4,14 +4,25 @@
 
 		<div class="columns">
 			<div class="column">
+				<div class="buttons">
+					<%= link_to new_user_path, class: "button is-primary is-outlined is-small" do %>
+						<%= fa_icon "pencil" %>&nbsp;New user
+					<% end %>
+				</div>
+			</div>
+		</div>
+
+		<div class="columns">
+			<div class="column">
 				<table class="table is-fullwidth is-striped is-bordered">
 					<thead>
 					<tr>
 						<th></th>
 						<th>Name</th>
 						<th>Email</th>
-						<th>Role</th>
-						<th></th>
+						<th class="has-text-centered" style="width: 32px">Role</th>
+						<th class="has-text-centered" style="width: 32px">Active</th>
+						<th style="width: 32px"></th>
 					</tr>
 					</thead>
 					<tbody>
@@ -20,10 +31,17 @@
 							<td style="width: 36px"><%= fa_icon "user" %></td>
 							<td><%= user.name %></td>
 							<td><%= user.email %></td>
-							<td><%= user.role.capitalize %></td>
-							<td style="width: 36px">
-								<%= link_to root_path do %>
-									<%= fa_icon "user-o" %>
+							<td class="has-text-centered"><%= user.role.capitalize %></td>
+							<td class="has-text-centered">
+								<% if user.active == true %>
+									Yes
+								<% else %>
+									No		
+								<% end %>		
+							</td>
+							<td>
+								<%= link_to edit_user_path(user.uuid) do %>
+									<%= fa_icon "pencil" %>
 								<% end %>
 							</td>
 						</tr>

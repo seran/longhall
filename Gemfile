@@ -33,6 +33,7 @@ gem 'bulma-rails'
 gem 'simple_form', '~> 5.1.0'
 gem 'font-awesome-rails'
 gem 'image_processing', '~> 1.2'
+gem 'slack-notifier'
 
 gem 'pagy', '~> 5.6' # omit patch digit
 

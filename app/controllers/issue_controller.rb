@@ -1,7 +1,7 @@
 class IssueController < ApplicationController
 
 	before_action :authenticate_user!
-	before_action :set_record, only: [:view, :edit, :update, :delete]
+	before_action :set_record, only: [:view, :edit, :update, :delete, :delete_file]
 
 	def index
 			query = Issue.where(nil)
@@ -87,6 +87,12 @@ class IssueController < ApplicationController
 		end
 	end
 
+	def delete_file
+		file = ActiveStorage::Attachment.find(params[:id])
+		file.purge
+		redirect_to view_issue_path(@record.uuid), notice: 'Attachment deleted successfully.'
+	end
+
 	private
 	def set_record
 		@record = Issue.find_by(uuid: params[:uuid])
@@ -96,7 +102,7 @@ class IssueController < ApplicationController
 	end
 
 	def request_params
-		params.require(:issue).permit(:title, :issue, :description, :solution, :score, :severity, :status, :scope_id)
+		params.require(:issue).permit(:title, :issue, :description, :solution, :score, :severity, :status, :scope_id, files: [])
 	end
 
 end

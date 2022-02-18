@@ -88,6 +88,40 @@
 
 		<div class="columns">
 			<div class="column">
+				<div class="columns">
+					<div class="column">
+						<p class="has-text-weight-semibold">Attachments</p>
+					</div>
+				</div>
+
+			<div class="columns">
+				<% if @record.files.count > 0 %>
+					<% @record.files.each do |file| %>
+						<div class="column is-3">
+							<% if file.variable? %>
+								<%= image_tag file.variant(resize: "400x400") %>
+							<% elsif file.previewable? %>
+								<%= image_tag file.preview(resize: "400x400"), rails_blob_path(file, disposition: :attachment) %>
+							<% else %>
+								
+							<% end %>
+							<span class="tag is-gray is-medium">
+								<%= link_to file.filename, rails_blob_path(file, disposition: :attachment) %>
+								<%= link_to 'Remove', issue_delete_attachment_path(@record.uuid, file.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "delete" %>
+							</span>
+						</div>
+					<% end %>
+					<% else %>
+						<div class="column">
+							<i>No attachments</i>
+						</div>
+					<% end %>
+			</div>
+			</div>
+		</div>
+
+		<div class="columns">
+			<div class="column">
 				<p class="has-text-weight-semibold">Comments</p>
 			</div>
 			<div class="column is-5">

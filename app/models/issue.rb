@@ -13,6 +13,7 @@ class Issue < ApplicationRecord
 
 	has_many :comments
 	has_many :tag
+	has_many_attached :files
 
 	scope :filter_by_status, -> (status) { where status: status }
 	scope :filter_by_severity, -> (severity) { where severity: severity }
@@ -24,6 +25,10 @@ class Issue < ApplicationRecord
 		id_with_zeros = "%04d" % self.id
 		"I#{self.created_at.year}#{self.created_at.month}#{self.created_at.day}#{id_with_zeros}"
 	end
+
+	def notify_slack
+      SlackNotifier::CLIENT.ping "🎴 New report: #{self.title} \n https://bounty.pickme.lk/report/show/#{self.uuid}"
+    end
 
 	private
 	def set_defaults

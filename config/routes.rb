@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   #   registrations: 'users/registrations'
   # }
 
+  scope ActiveStorage.routes_prefix do
+    get "/blobs/redirect/:signed_id/*filename" => "secure_blobs#show"
+  end
+
   get '/', to: 'home#index', as: 'home_page'
 
   get '/projects', to: 'project#index', as: 'projects_list'
@@ -30,12 +34,17 @@ Rails.application.routes.draw do
   get '/issues/view/:uuid', to: 'issue#view', as: 'view_issue'
   get '/issues/edit/:uuid', to: 'issue#edit', as: 'edit_issue'
   patch '/issues/edit/:uuid', to: 'issue#update', as: 'update_issue'
+  delete '/issues/a/delete/:uuid/:id', to: 'issue#delete_file', as: 'issue_delete_attachment'
 
   post '/comments/create/:uuid', to: 'comment#create', as: 'create_comment'
   
-  get '/adminland', to: 'admin/general#index', as: 'admin_general_page'
-  patch '/adminland/settings', to: 'admin/general#update', as: 'update_settings'
-  get '/adminland/users', to: 'admin/users#index', as: 'admin_users_page'
+  get '/admin', to: 'admin/general#index', as: 'admin_general_page'
+  patch '/admin/settings', to: 'admin/general#update', as: 'update_settings'
+  get '/admin/users', to: 'admin/users#index', as: 'admin_users_page'
+  get '/admin/users/create', to: 'admin/users#new', as: 'new_user'
+  post '/admin/users/create', to: 'admin/users#create', as: 'create_user'
+  get '/admin/users/edit/:uuid', to: 'admin/users#edit', as: 'edit_user'
+  post '/admin/users/edit/:uuid', to: 'admin/users#update', as: 'update_user'
 
   get '/settings', to: 'settings#index', as: 'settings_page'
   get '/help', to: 'help#index', as: 'help_page'
