@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(version: 2022_02_18_181429) do
 
   create_table "comments", charset: "utf8mb4", force: :cascade do |t|
     t.text "message"
-    t.bigint "issue_id", null: false
-    t.bigint "user_id", null: false
+    t.bigint "issue_id"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["issue_id"], name: "index_comments_on_issue_id"
@@ -58,8 +58,8 @@ ActiveRecord::Schema.define(version: 2022_02_18_181429) do
     t.float "score"
     t.text "description"
     t.text "solution"
-    t.bigint "scope_id", null: false
-    t.bigint "user_id", null: false
+    t.bigint "scope_id"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["scope_id"], name: "index_issues_on_scope_id"
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 2022_02_18_181429) do
     t.string "title"
     t.text "description"
     t.integer "status", default: 0
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_projects_on_user_id"
@@ -91,8 +91,8 @@ ActiveRecord::Schema.define(version: 2022_02_18_181429) do
     t.integer "status"
     t.text "description"
     t.string "version"
-    t.bigint "project_id", null: false
-    t.bigint "user_id", null: false
+    t.bigint "project_id"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["project_id"], name: "index_scopes_on_project_id"
@@ -101,8 +101,8 @@ ActiveRecord::Schema.define(version: 2022_02_18_181429) do
 
   create_table "tags", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
-    t.bigint "issue_id", null: false
-    t.bigint "user_id", null: false
+    t.bigint "issue_id"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["issue_id"], name: "index_tags_on_issue_id"
