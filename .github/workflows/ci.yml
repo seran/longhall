@@ -14,17 +14,23 @@ jobs:
   test:
     runs-on: ubuntu-latest
     services:
-      postgres:
-        image: postgres:11-alpine
+      mariadb:
+        image: mysql:5.7
         ports:
-          - "5432:5432"
+          - "3306:3306"
         env:
-          POSTGRES_DB: rails_test
-          POSTGRES_USER: rails
-          POSTGRES_PASSWORD: password
+          MYSQL_USER: user
+          MYSQL_PASSWORD: password
+          MYSQL_DB: longhall_test
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_HOST: 127.0.0.1
+        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
     env:
       RAILS_ENV: test
-      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+      DB_PASSWORD: password
+      DB_USER: user
+      DB_HOST: 127.0.0.1
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
