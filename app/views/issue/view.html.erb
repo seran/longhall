@@ -44,6 +44,10 @@
 						<td>Status</td>
 						<td><%= @record.status.capitalize %></td>
 					</tr>
+					<tr>
+						<td>Created At</td>
+						<td><span title="<%= format_time(@record.created_at, "CET") %>"><%= distance_of_time_in_words_to_now(@record.created_at) %></span></td>
+					</tr>
 					</tbody>
 				</table>
 			</div>
@@ -162,8 +166,28 @@
 
 		<div class="columns">
 			<div class="column">
-				<% @record.audits.last.audited_changes.each do |r| %>
-					<%= r %>
+				<% @record.audits.each do |r| %>
+					<div>
+						Record
+						<% if r.action == "create" %>
+							created
+							<% elsif r.action == "update" %>
+						updated
+							<% end %>
+						<span title="<%= format_time(@record.created_at, "CET") %>"><%= distance_of_time_in_words_to_now(r.created_at) %> ago</span>
+						by <%= r.user.name %>
+					</div>
+					<div>
+						<% if r.action == "update" %>
+							<% r.audited_changes.each do |a| %>
+								<div>
+									<b><%= a[0].titleize %></b>
+									from <i><%= a[1][0] %></i>
+									to <i><%= a[1][1] %></i>
+								</div>
+							<% end %>
+						<% end %>
+					</div>
 				<% end %>
 			</div>
 		</div>
