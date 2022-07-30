@@ -41,6 +41,8 @@ gem 'simple_form', '~> 5.1.0'
 # Flexbox based CSS framework
 gem 'bulma-rails'
 
+gem "audited", "~> 5.0"
+
 gem 'font-awesome-rails'
 gem 'image_processing', '~> 1.2'
 gem 'slack-notifier'
