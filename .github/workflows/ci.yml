@@ -7,9 +7,8 @@
 name: "Ruby on Rails CI"
 on:
   push:
-    branches: [ master, stage, dev ]
-  pull_request:
-    branches: [ master, stage, dev ]
+    tags:
+      - '*'
 jobs:
   test:
     runs-on: ubuntu-latest
