@@ -1,10 +1,14 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.2'
+ruby '3.1.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
+gem 'rails', '~> 7.0.3'
+
+# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
+gem "sprockets-rails"
+
 # Use mysql as the database for Active Record
 gem 'mysql2', '~> 0.5'
 # Use Puma as the app server
@@ -28,14 +32,23 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
+# Used for authentication
 gem 'devise'
-gem 'bulma-rails'
+
+# Used for form generation
 gem 'simple_form', '~> 5.1.0'
+
+# Flexbox based CSS framework
+gem 'bulma-rails'
+
 gem 'font-awesome-rails'
 gem 'image_processing', '~> 1.2'
 gem 'slack-notifier'
 
-gem 'pagy', '~> 5.6' # omit patch digit
+gem 'net-smtp', require: false
+
+# omit patch digit for pagy
+gem 'pagy', '~> 5.6'
 
 
 

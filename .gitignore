@@ -35,4 +35,8 @@
 yarn-debug.log*
 .yarn-integrity
 
+# Ignore Docker volumes for development
 volumes/*
+
+# Ignore Idea directory
+.idea/

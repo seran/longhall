@@ -1,4 +1,4 @@
-FROM ruby:3.0.2
+FROM ruby:3.1.2
 
 # nodejs and yarn
 RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
@@ -15,6 +15,6 @@ ADD Gemfile.lock /app/Gemfile.lock
 RUN gem install bundler:2.2.31
 RUN bundle install
 RUN bundle exec rails webpacker:install
-
+RUN bundle exec rails db:migrate
 ADD . /app
 
