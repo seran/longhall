@@ -1,4 +1,5 @@
 class Issue < ApplicationRecord
+	audited
 	enum status: [:open, :closed, :ongoing, :cancelled]
 	enum severity: [:low, :medium, :high, :critical]
 
