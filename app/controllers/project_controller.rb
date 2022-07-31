@@ -1,7 +1,7 @@
 class ProjectController < ApplicationController
 
 	before_action :authenticate_user!
-	before_action :set_record, only: [:view, :edit, :update, :delete, :delete_file]
+	before_action :set_record, only: [:view, :edit, :update, :updates, :delete, :delete_file]
 	before_action :check_super, only: [:new, :create, :edit, :update]
 
 	def index
@@ -15,6 +15,10 @@ class ProjectController < ApplicationController
 
 	def view
 		@pagy, @records = pagy(@record.scope, items: 2)
+	end
+
+	def updates
+		@updates = @record.audits.reorder(id: :desc)
 	end
 
 	def new

@@ -1,5 +1,12 @@
 <div class="columns">
 	<div class="column">
+
+		<div class="columns">
+			<div class="column">
+				<%= render "/project/tab" %>
+			</div>
+		</div>
+
 		<div class="columns">
 			<div class="column">
 				<%= link_to new_scope_path(uuid: @record.uuid), class: "button is-primary is-outlined is-small"  do %>

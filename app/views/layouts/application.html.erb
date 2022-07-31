@@ -1,116 +1,119 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<%= favicon_link_tag asset_path('favicon-32x32.png') %>
-	<title>Project Longhall</title>
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<%= csrf_meta_tags %>
-	<%= csp_meta_tag %>
+  <%= favicon_link_tag asset_path('favicon-32x32.png') %>
+  <title>Project Longhall</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-	<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-	<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 
 <body>
 
 
+  <nav class="navbar is-white" role="navigation" aria-label="main navigation">
+    <div class="container is-max-desktop">
+      <div class="navbar-brand">
+        <%= link_to home_page_path, class: "navbar-item #{current(home_page_path)}" do %>
+          <%= fa_icon "bolt" %>
+        <% end %>
 
-	<nav class="navbar is-white" role="navigation" aria-label="main navigation">
-		<div class="container is-max-desktop">
-			<div class="navbar-brand">
-				<%= link_to home_page_path, class: "navbar-item #{current(home_page_path)}" do %>
-				<%= fa_icon "bolt" %>
-				<% end %>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
 
-				<a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-					<span aria-hidden="true"></span>
-					<span aria-hidden="true"></span>
-					<span aria-hidden="true"></span>
-				</a>
-			</div>
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <% if user_signed_in? %>
+            <%= link_to projects_list_path, class: "navbar-item #{current(projects_list_path)}" do %>Projects
+            <% end %>
+            <%= link_to issues_list_path, class: "navbar-item #{current(issues_list_path)}" do %>Issues
+            <% end %>
+          <% end %>
+        </div>
 
-			<div id="navbarBasicExample" class="navbar-menu">
-				<div class="navbar-start">
-					<% if user_signed_in? %>
-					<%= link_to projects_list_path, class: "navbar-item #{current(projects_list_path)}" do %>Projects<% end %>
-					<%= link_to issues_list_path, class: "navbar-item #{current(issues_list_path)}" do %>Issues<% end %>
-					<% end %>
-				</div>
+        <div class="navbar-end">
+          <% if user_signed_in? %>
+            <%= link_to new_issue_path, class: "navbar-item #{current(new_issue_path)}" do %>New issue
+            <% end %>
+          <% end %>
 
-				<div class="navbar-end">
-					<% if user_signed_in? %>
-					<%= link_to new_issue_path, class: "navbar-item #{current(new_issue_path)}" do %>New issue<% end %>
-					<% end %>
+          <%= link_to help_page_path, class: "navbar-item #{current(help_page_path)}" do %>
+            <%= fa_icon "question-circle" %>
+          <% end %>
 
-					<%= link_to help_page_path, class: "navbar-item #{current(help_page_path)}" do %>
-					<%= fa_icon "question-circle" %>
-					<% end %>
-					
-					<% if user_signed_in? %>
-					<% if current_user.admin? %>
-						<%= link_to "Adminland", admin_general_page_path, class: "navbar-item #{current(admin_general_page_path)}" %>
-					<% end %>
+          <% if user_signed_in? %>
+            <% if current_user.admin? %>
+              <%= link_to "Adminland", admin_general_page_path, class: "navbar-item #{current(admin_general_page_path)}" %>
+            <% end %>
 
-					<div class="navbar-item has-dropdown is-hoverable">
-						<a class="navbar-link">
-							<p>Hello!</p>
-						</a>
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                <p>Hello!</p>
+              </a>
 
-						<div class="navbar-dropdown is-right">
-							<%= link_to "Change password", edit_user_path(current_user.uuid), class: "navbar-item #{current(settings_page_path)}" %>
-							<hr class="navbar-divider">
-							<%= link_to destroy_user_session_path, method: :delete, class:"navbar-item" do %>
-							<%= fa_icon "power-off" %>&nbsp;Log Out
-							<% end %>
-						</div>
-						<% else %>
-						<%= link_to "Log in", new_user_session_path, class: "navbar-item" %>
-						<% end %>
-					</div>
-				</div>
-			</div>
-		</nav>
+              <div class="navbar-dropdown is-right">
+                <%= link_to "Change password", edit_user_path(current_user.uuid), class: "navbar-item #{current(settings_page_path)}" %>
+                <hr class="navbar-divider">
+                <%= link_to destroy_user_session_path, method: :delete, class: "navbar-item" do %>
+                  <%= fa_icon "power-off" %>&nbsp;Log Out
+                <% end %>
+              </div>
+          <% else %>
+            <%= link_to "Log in", new_user_session_path, class: "navbar-item" %>
+          <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
 
-		<div class="container is-max-desktop" style="margin-top: 10px;">
-			<div class="columns is-centered">
-				<div class="column is-10">
-					<% if flash[:notice] %>
-					<div class="notification is-primary global-notification">
-						<p><%= notice %></p>
-					</div>
-					<% end %>
-					<% if flash[:errors] %>
-					<% flash[:errors].each do |error| %>
-					<div class="notification is-danger global-notification">
-						<p><%= error %></p>
-					</div>
-					<% end %>
-					<% end %>
-					<% if flash[:alert] %>
-					<div class="notification is-warning global-notification">
-						<p><%= alert %></p>
-					</div>
-					<% end %>
-				</div>
-			</div>
+  <div class="container is-max-desktop" style="margin-top: 10px;">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <% if flash[:notice] %>
+          <div class="notification is-primary global-notification">
+            <p><%= notice %></p>
+          </div>
+        <% end %>
+        <% if flash[:errors] %>
+          <% flash[:errors].each do |error| %>
+            <div class="notification is-danger global-notification">
+              <p><%= error %></p>
+            </div>
+          <% end %>
+        <% end %>
+        <% if flash[:alert] %>
+          <div class="notification is-warning global-notification">
+            <p><%= alert %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
 
-			<div class="columns inner-background">
-				<div class="column">
-					<%= yield %>
-				</div>
-			</div>
-		</div>
+    <div class="columns inner-background">
+      <div class="column">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
 
-		<div class="container">
-			<footer class="footer">
-				<div class="content has-text-centered">
-					<small>
-						The source code is licensed
-						<a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
-						is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
-					</small>
-				</div>
-			</footer>
-		</div>
-	</body>
-	</html>
+  <div class="container">
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <small>
+          The source code is licensed
+          <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+          is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+        </small>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

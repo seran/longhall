@@ -1,7 +1,7 @@
 class IssueController < ApplicationController
 
 	before_action :authenticate_user!
-	before_action :set_record, only: [:view, :edit, :update, :delete, :delete_file]
+	before_action :set_record, only: [:view, :edit, :update, :updates, :delete, :delete_file]
 
 	def index
 			query = Issue.where(nil)
@@ -32,6 +32,9 @@ class IssueController < ApplicationController
 		@comment.issue_id = @record.id
 	end
 
+	def updates
+		@updates = @record.audits.reorder(id: :desc)
+	end
 
 	def new
 		if !params[:uuid].nil?

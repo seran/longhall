@@ -1,4 +1,5 @@
 class Scope < ApplicationRecord
+	audited
 
 	belongs_to :project
 	belongs_to :user

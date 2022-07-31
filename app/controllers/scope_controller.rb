@@ -1,7 +1,7 @@
 class ScopeController < ApplicationController
 
 	before_action :authenticate_user!
-	before_action :set_record, only: [:view, :edit, :update, :delete]
+	before_action :set_record, only: [:view, :edit, :update, :updates, :delete]
 
 	def index
 		if !params[:search].blank?
@@ -16,6 +16,10 @@ class ScopeController < ApplicationController
 		if @record.issue.length > 0
 			@pagy, @records = pagy(@record.issue.order('id desc'), items: 2)
 		end
+	end
+
+	def updates
+		@updates = @record.audits.reorder(id: :desc)
 	end
 
 	def new
